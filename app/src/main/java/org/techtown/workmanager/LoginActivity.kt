@@ -67,6 +67,16 @@ class LoginActivity  : AppCompatActivity() {
                         if (success != null && success == "true") {
                             Toast.makeText(applicationContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
 
+                            val user = User(
+                                jsonObject.getInt("emp_id"),
+                                jsonObject.getString("emp_name"),
+                                jsonObject.getString("emp_phone"),
+                                jsonObject.getString("dep_name")
+                            )
+
+                            // 사용자 정보 저장
+                            SharedPrefManager.getInstance(applicationContext)!!.userLogin(user)
+
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             intent.putExtra("emp_id", emp_id)
                             startActivity(intent)

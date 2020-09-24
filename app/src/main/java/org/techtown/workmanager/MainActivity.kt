@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-
+        finish();
+        SharedPrefManager.getInstance(getApplicationContext())!!.logout();
     }
 
     override fun onBackPressed() {
