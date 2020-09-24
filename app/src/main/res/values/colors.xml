@@ -3,4 +3,13 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="c_white">@android:color/white</color>
+    <color name="c_black">@android:color/black</color>
+    <color name="c_B8B6B6">#B8B6B6</color>
+    <color name="c_737373">#737373</color>
+
+    <color name="c_B1EA7F">#B1EA7F</color>
+    <color name="c_4D9C37">#4D9C37</color>
+    <color name="c_77CA60">#77CA60</color>
 </resources>
