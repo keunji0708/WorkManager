@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:background="@drawable/et_rect_gray"
+            android:background="@drawable/bd_rect_gray"
             android:ems="10"
             android:hint="사번"
             android:inputType="number"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/et_rect_gray"
+            android:background="@drawable/bd_rect_gray"
             android:ems="10"
             android:hint="비밀번호"
             android:inputType="textPassword"
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/bt_corn_round"
+            android:background="@drawable/bd_round_white"
             android:backgroundTint="@color/c_B1EA7F"
             android:text="로그인"
             android:textSize="18dp" />
@@ -69,7 +69,7 @@
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/bt_corn_round"
+            android:background="@drawable/bd_round_white"
             android:backgroundTint="@color/c_4D9C37"
             android:text="회원가입"
             android:textColor="@color/c_white"

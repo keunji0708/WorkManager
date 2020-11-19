@@ -1,4 +1,4 @@
-package org.techtown.workmanager
+package org.techtown.workmanager.login
 
 
 import android.content.Intent
@@ -16,6 +16,10 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
 import org.json.JSONObject
+import org.techtown.workmanager.MainActivity
+import org.techtown.workmanager.R
+import org.techtown.workmanager.User
+import org.techtown.workmanager.common.SharedPrefManager
 
 
 class LoginActivity  : AppCompatActivity() {
@@ -100,7 +104,12 @@ class LoginActivity  : AppCompatActivity() {
             }
 
         // Volley 로 로그인 양식 웹전송
-        val loginRequest = LoginRequest(emp_id, emp_pw, responseListener, errorListener)
+        val loginRequest = LoginRequest(
+            emp_id,
+            emp_pw,
+            responseListener,
+            errorListener
+        )
         loginRequest.setShouldCache(false)
         val queue = Volley.newRequestQueue(applicationContext)
         queue.add(loginRequest)
