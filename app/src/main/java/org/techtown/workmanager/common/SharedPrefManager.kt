@@ -3,12 +3,12 @@ package org.techtown.workmanager.common
 import android.content.Context
 import android.content.Intent
 import org.techtown.workmanager.login.LoginActivity
-import org.techtown.workmanager.User
+import org.techtown.workmanager.login.User
 
 class SharedPrefManager private constructor(context: Context) {
 
     // SharedPreference에 사용자 정보 저장
-    fun userLogin(user: User) {
+    fun saveUserInfo(user: User) {
         val sharedPreferences = mContext!!.getSharedPreferences(SHARED_USER_INFO, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putInt(USER_ID, user.emp_id)

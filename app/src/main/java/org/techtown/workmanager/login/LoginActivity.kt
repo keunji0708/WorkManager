@@ -14,11 +14,11 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import org.json.JSONException
 import org.json.JSONObject
 import org.techtown.workmanager.MainActivity
 import org.techtown.workmanager.R
-import org.techtown.workmanager.User
 import org.techtown.workmanager.common.SharedPrefManager
 
 
@@ -68,18 +68,13 @@ class LoginActivity  : AppCompatActivity() {
                         val jsonObject = JSONObject(response)
                         val success = jsonObject.getString("success")
                         Log.e("LOGINREQUEST", "response : " + response)
-                        if (success != null && success == "true") {
+                        if (success == "true") {
                             Toast.makeText(applicationContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
 
-                            val user = User(
-                                jsonObject.getInt("emp_id"),
-                                jsonObject.getString("emp_name"),
-                                jsonObject.getString("emp_phone"),
-                                jsonObject.getString("dep_name")
-                            )
-
-                            // 사용자 정보 저장
-                            SharedPrefManager.getInstance(applicationContext)!!.userLogin(user)
+                            val userObject = jsonObject.getString("user")
+                            val gson = Gson()
+                            val user: User = gson.fromJson(userObject, User::class.java)
+                            SharedPrefManager.getInstance(applicationContext)!!.saveUserInfo(user)
 
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             intent.putExtra("emp_id", emp_id)

@@ -1,4 +1,4 @@
-package org.techtown.workmanager
+package org.techtown.workmanager.login
 
 class User(
     val emp_id: Int,
