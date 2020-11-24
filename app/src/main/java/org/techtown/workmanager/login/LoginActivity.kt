@@ -19,10 +19,14 @@ import org.json.JSONException
 import org.json.JSONObject
 import org.techtown.workmanager.MainActivity
 import org.techtown.workmanager.R
-import org.techtown.workmanager.common.SharedPrefManager
+import org.techtown.workmanager.base.BaseActivity
+import org.techtown.workmanager.common.Constant
+import org.techtown.workmanager.common.SharedPreferenceManager
+import org.techtown.workmanager.dataservice.VolleyResponseListener
+import org.techtown.workmanager.dataservice.VolleyService
 
 
-class LoginActivity  : AppCompatActivity() {
+class LoginActivity : BaseActivity() {
     val TAG = "MyRequestQueue"
 
     private var btn_login: Button? = null
@@ -46,7 +50,9 @@ class LoginActivity  : AppCompatActivity() {
 
         btn_login!!.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                login()
+                //login()
+                startMainActivity()
+                finish()
             }
         })
 
@@ -59,26 +65,29 @@ class LoginActivity  : AppCompatActivity() {
     private fun login() {
         val emp_id: String = et_login_id?.text.toString()
         val emp_pw: String = et_login_pw?.text.toString()
-        Log.e("LOGINREQUEST", emp_id +", " + emp_pw)
 
-        val responseListener: Response.Listener<String?> =
-            object : Response.Listener<String?> {
+        val params: MutableMap<String, String> = HashMap()
+        params["emp_id"] = emp_id
+        params["emp_pw"] =  emp_pw
+
+        val URL_POST = Constant.server_url + "/login/login.php"
+
+        VolleyService.request_POST(this, URL_POST, params,
+            object : VolleyResponseListener {
                 override fun onResponse(response: String?) {
                     try {
                         val jsonObject = JSONObject(response)
                         val success = jsonObject.getString("success")
-                        Log.e("LOGINREQUEST", "response : " + response)
-                        if (success == "true") {
-                            Toast.makeText(applicationContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
 
+                        if (success == "true") {
                             val userObject = jsonObject.getString("user")
                             val gson = Gson()
                             val user: User = gson.fromJson(userObject, User::class.java)
-                            SharedPrefManager.getInstance(applicationContext)!!.saveUserInfo(user)
+                            SharedPreferenceManager.getInstance(applicationContext)!!
+                                .saveUserInfo(user)
 
-                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                            intent.putExtra("emp_id", emp_id)
-                            startActivity(intent)
+                            Toast.makeText(applicationContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                            startMainActivity()
                             finish()
                         } else {
                             Toast.makeText(applicationContext, "로그인 실패!", Toast.LENGTH_SHORT).show()
@@ -87,29 +96,19 @@ class LoginActivity  : AppCompatActivity() {
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
-                }
-            }
-        val errorListener: Response.ErrorListener =
-            object : Response.ErrorListener {
-                override fun onErrorResponse(error: VolleyError?) {
-                    Log.e("LOGINREQUEST", "error : " + error)
-                    Toast.makeText(applicationContext, "로그인 처리시 에러발생!", Toast.LENGTH_SHORT).show()
-                    return
-                }
-            }
 
-        // Volley 로 로그인 양식 웹전송
-        val loginRequest = LoginRequest(
-            emp_id,
-            emp_pw,
-            responseListener,
-            errorListener
-        )
-        loginRequest.setShouldCache(false)
-        val queue = Volley.newRequestQueue(applicationContext)
-        queue.add(loginRequest)
+                }
+
+                override fun onError(message: String?) {
+                    Toast.makeText(applicationContext, "로그인 처리시 에러발생!", Toast.LENGTH_SHORT).show()
+                }
+
+            })
     }
 
-
+    private fun startMainActivity(){
+        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+        startActivity(intent)
+    }
 
 }

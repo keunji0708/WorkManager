@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import org.techtown.workmanager.common.SharedPrefManager
+import org.techtown.workmanager.base.AppBaseActivity
+import org.techtown.workmanager.base.BaseActivity
+import org.techtown.workmanager.common.SharedPreferenceManager
 
-class MainActivity : AppCompatActivity() {
-    private var btn_logout: Button? = null
+class MainActivity : AppBaseActivity() {
 
     // 마지막으로 뒤로 가기 버튼을 눌렀던 시간 저장
     private var backKeyPressedTime: Long = 0
@@ -18,22 +19,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        btn_logout = findViewById(R.id.btn_logout)
+        setContentView(R.layout.activity_home)
 
 
-        btn_logout!!.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                logout()
-            }
-        })
     }
 
-    private fun logout() {
-        finish();
-        SharedPrefManager.getInstance(getApplicationContext())!!.logout();
-    }
+
 
     override fun onBackPressed() {
         //super.onBackPressed();

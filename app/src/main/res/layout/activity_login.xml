@@ -12,8 +12,8 @@
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/ic_baseline_person_pin_24" />
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/icon_tree" />
 
     <TextView
         android:layout_width="match_parent"
@@ -36,13 +36,13 @@
         <EditText
             android:id="@+id/et_login_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginBottom="15dp"
             android:background="@drawable/bd_rect_gray"
-            android:ems="10"
-            android:hint="사번"
+            android:hint="@string/sabun"
             android:inputType="number"
-            android:textSize="18dp" />
+            android:text="10000"
+            android:textSize="17dp" />
 
         <EditText
             android:id="@+id/et_login_pw"
@@ -50,10 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
             android:background="@drawable/bd_rect_gray"
-            android:ems="10"
-            android:hint="비밀번호"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
             android:inputType="textPassword"
-            android:textSize="18dp" />
+            android:text="aaaa"
+            android:textSize="17dp" />
 
         <Button
             android:id="@+id/btn_login"
@@ -62,7 +63,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/bd_round_white"
             android:backgroundTint="@color/c_B1EA7F"
-            android:text="로그인"
+            android:text="@string/login"
             android:textSize="18dp" />
 
         <Button
@@ -71,10 +72,14 @@
             android:layout_height="40dp"
             android:background="@drawable/bd_round_white"
             android:backgroundTint="@color/c_4D9C37"
-            android:text="회원가입"
+            android:text="@string/signUp"
             android:textColor="@color/c_white"
             android:textSize="18dp" />
 
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
 
 </LinearLayout>

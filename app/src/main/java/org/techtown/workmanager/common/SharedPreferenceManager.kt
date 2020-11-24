@@ -5,7 +5,7 @@ import android.content.Intent
 import org.techtown.workmanager.login.LoginActivity
 import org.techtown.workmanager.login.User
 
-class SharedPrefManager private constructor(context: Context) {
+class SharedPreferenceManager private constructor(context: Context) {
 
     // SharedPreference에 사용자 정보 저장
     fun saveUserInfo(user: User) {
@@ -59,14 +59,14 @@ class SharedPrefManager private constructor(context: Context) {
         private const val USER_PHONE = "USER_PHONE"
         private const val USER_DEPART = "USER_DEPART"
 
-        private var mInstance: SharedPrefManager? = null
+        private var mInstance: SharedPreferenceManager? = null
         private var mContext: Context? = null
 
         @Synchronized
-        fun getInstance(context: Context): SharedPrefManager? {
+        fun getInstance(context: Context): SharedPreferenceManager? {
             if (mInstance == null) {
                 mInstance =
-                    SharedPrefManager(context)
+                    SharedPreferenceManager(context)
             }
             return mInstance
         }

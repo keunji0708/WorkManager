@@ -1,3 +1,50 @@
 <resources>
     <string name="app_name">Forest</string>
+
+    <string name="logout_en">logout</string>
+
+    <string name="sabun">사번</string>
+    <string name="password">비밀번호</string>
+    <string name="name">이름</string>
+    <string name="phone">휴대폰</string>
+    <string name="email">이메일</string>
+    <string name="birth">생년월일</string>
+    <string name="depart">부서</string>
+    <string name="position">직위</string>
+
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="signUp">회원가입</string>
+
+    <!-- bottom navigation -->
+    <string name="bottom_search">임직원 검색</string>
+    <string name="bottom_home">홈</string>
+    <string name="bottom_yeolmae">열매/씨앗</string>
+    <string name="bottom_report">업무보고</string>
+    <string name="bottom_temp">설정</string>
+
+    <string name="gift">열매선물</string>
+    <string name="settings">설정</string>
+
+    <string name="tv_employee">직원</string>
+    <string name="tv_yeolmae">열매</string>
+    <string name="tv_message">내용</string>
+
+    <string name="test_name">홍길동</string>
+    <string name="test_date">2020–10–10</string>
+    <string name="test_yyyymm">2020년 10월</string>
+    <string name="test_message">선물입니다.</string>
+    <string name="test_long_message">수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.</string>
+
+    <string name="test_project">하나은행 스크래핑</string>
+    <string name="test_contents">하나은행 스크래핑 개편</string>
+
+    <string name="근무시간">근무시간</string>
+    <string name="칭찬하기">칭찬하기</string>
+    <string name="선물하기">선물하기</string>
+    <string name="start_time">08:30</string>
+    <string name="end_time">18:00</string>
+    <string name="프로젝트">프로젝트</string>
+    <string name="내용">내용</string>
+
 </resources>
