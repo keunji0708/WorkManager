@@ -15,7 +15,6 @@ import org.techtown.workmanager.common.Constant
 import org.techtown.workmanager.common.SharedPreferenceManager
 import org.techtown.workmanager.login.LoginActivity
 import org.techtown.workmanager.login.User
-import kotlin.jvm.internal.Intrinsics
 
 
 open class AppBaseActivity : BaseActivity(){
@@ -38,7 +37,7 @@ open class AppBaseActivity : BaseActivity(){
     override fun setContentView(layoutResID: Int) {
         val baseView : DrawerLayout = layoutInflater.inflate(R.layout.activity_base, null) as DrawerLayout
         val activityContainer : FrameLayout = baseView.findViewById(R.id.activity_content)
-        layoutInflater.inflate(layoutResID, activityContainer, true);
+        layoutInflater.inflate(layoutResID, activityContainer, true)
         super.setContentView(baseView)
 
         setUserInfo()
@@ -96,14 +95,14 @@ open class AppBaseActivity : BaseActivity(){
             }
 
         } else {
-            toolbar.visibility = View.GONE;
+            toolbar.visibility = View.GONE
         }
 
     }
 
     //툴바를 사용할지 말지 정함
     open fun useToolbar() : Boolean {
-        return true;
+        return true
     }
 
     //툴바 타이틀 설정
@@ -125,12 +124,13 @@ open class AppBaseActivity : BaseActivity(){
     }
 
     private fun logout(){
+        Log.e(TAG, "-----logout-------->")
         finish()
         SharedPreferenceManager.getInstance(applicationContext)!!.logout()
     }
 
     fun isMenuOpen(): Boolean{
-        return mDrawerLayout!!.isDrawerOpen(GravityCompat.END);
+        return mDrawerLayout!!.isDrawerOpen(GravityCompat.END)
     }
 
     fun closeMenu() {

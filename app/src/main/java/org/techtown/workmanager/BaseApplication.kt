@@ -59,7 +59,7 @@ class BaseApplication : Application() {
             return
         }
         if (progressDialog != null && progressDialog!!.isShowing) {
-            setProgressDialog("")
+            setProgressDialog()
         }
         else {
             progressDialog = AppCompatDialog(activity)
@@ -76,16 +76,10 @@ class BaseApplication : Application() {
 
     }
 
-    // 로딩화면에 글씨 추가
-    private fun setProgressDialog(message: String?) {
+    private fun setProgressDialog() {
         if (progressDialog == null || !progressDialog!!.isShowing) {
             return
         }
-//        val tv_progress_message = progressDialog!!.findViewById<View>(R.id.tv_progress_message) as TextView?
-//
-//        if (!TextUtils.isEmpty(message)) {
-//            tv_progress_message!!.text = message
-//        }
     }
 
     // 로딩화면 숨김

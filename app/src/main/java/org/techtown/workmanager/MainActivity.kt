@@ -65,13 +65,13 @@ class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSel
             closeApp()
         } else {
             val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-            transaction!!.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
+            transaction.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
             bottomNavigationView!!.setSelectedItemId(R.id.navigation_home)
         }
 
     }
 
-    fun closeApp() {
+    private fun closeApp() {
 
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2초를 더해 현재 시간과 비교 후
         // 2초가 지났으면 Toast 출력
