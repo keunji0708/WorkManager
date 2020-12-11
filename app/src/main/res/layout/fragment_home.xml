@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <TextView
             android:id="@+id/tv_home_today"
@@ -42,14 +43,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/imageView"
                     android:layout_width="80dp"
                     android:layout_height="100dp"
-                    app:srcCompat="@drawable/pic_id_sample" />
+                    app:srcCompat="@drawable/pic_employee" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -59,28 +61,25 @@
                     android:padding="8dp">
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/tv_home_emp_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="유재석 부장"
                         android:textColor="@color/c_black"
                         android:textSize="15dp" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/tv_home_emp_depart"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="5dp"
-                        android:text="Emerging Biz Part"
                         android:textColor="@color/c_black"
                         android:textSize="13dp" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/tv_home_emp_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="010-0000-0000"
                         android:textColor="@color/c_black"
                         android:textSize="13dp" />
                 </LinearLayout>
@@ -106,23 +105,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/tv_home_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="03:10 오후"
                     android:textColor="@color/c_black"
                     android:textSize="24dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/tv_home_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2020년 11월 11일 (수)" />
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,7 +141,9 @@
                             android:layout_width="75dp"
                             android:layout_height="70dp"
                             android:background="@drawable/btn_round_green_light"
-                            android:text="출근" />
+                            android:text="출근"
+                            android:textColor="@color/c_white"
+                            android:textSize="17dp" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -158,7 +158,9 @@
                             android:layout_width="75dp"
                             android:layout_height="70dp"
                             android:background="@drawable/btn_round_green_light"
-                            android:text="퇴근" />
+                            android:text="퇴근"
+                            android:textColor="@color/c_white"
+                            android:textSize="17dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -170,16 +172,119 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/tv_home_출근"
                         style="@style/textStyle"
                         android:layout_weight="1"
-                        android:text="퇴근 - 18:30:29" />
+                        android:hint="출근 - 00:00:00" />
 
                     <TextView
-                        android:id="@+id/textView11"
+                        android:id="@+id/tv_home_퇴근"
                         style="@style/textStyle"
                         android:layout_weight="1"
-                        android:text="출근 - 08:50:33" />
+                        android:hint="퇴근 - 00:00:00" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/HomeLayoutComponent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_profile"
+                android:drawablePadding="5dp"
+                android:text="이번 달 열매/씨앗" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/icon_apple" />
+
+                        <TextView
+                            android:id="@+id/tv_home_yeolmae"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_home_send_yeolmae"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bd_round_white"
+                        android:backgroundTint="#2962B6"
+                        android:text="열매 선물"
+                        android:textColor="@color/c_white" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:src="@drawable/icon_seed" />
+
+                        <TextView
+                            android:id="@+id/tv_home_seed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:textSize="18dp" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_home_rank_yeolmae"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bd_round_white"
+                        android:backgroundTint="#653EAC"
+                        android:text="열매 랭킹"
+                        android:textColor="@color/c_white" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -193,28 +298,27 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/icon_profile"
                 android:drawablePadding="5dp"
-                android:text="열매/씨앗" />
+                android:text="최근 공지사항" />
 
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_notice"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="열매 219개" />
+                android:nestedScrollingEnabled="false"
+                android:layout_marginTop="10dp" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="씨앗 50개" />
+                android:text="공지사항으로 이동" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

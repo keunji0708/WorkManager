@@ -81,11 +81,11 @@ class BaseApplication : Application() {
         if (progressDialog == null || !progressDialog!!.isShowing) {
             return
         }
-        val tv_progress_message = progressDialog!!.findViewById<View>(R.id.tv_progress_message) as TextView?
-
-        if (!TextUtils.isEmpty(message)) {
-            tv_progress_message!!.text = message
-        }
+//        val tv_progress_message = progressDialog!!.findViewById<View>(R.id.tv_progress_message) as TextView?
+//
+//        if (!TextUtils.isEmpty(message)) {
+//            tv_progress_message!!.text = message
+//        }
     }
 
     // 로딩화면 숨김

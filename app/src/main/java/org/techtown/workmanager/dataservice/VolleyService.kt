@@ -8,6 +8,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
+import org.techtown.workmanager.base.BaseActivity
 
 
 object VolleyService {
@@ -28,13 +29,18 @@ object VolleyService {
         VolleySingleton.getInstance(context!!).addToRequestQueue(stringRequest)
     }
 
-    fun request_POST(context: Context?, url: String?, getParams: MutableMap<String, String>, listener: VolleyResponseListener) {
+    fun request_POST(activity: Activity?, url: String?, getParams: MutableMap<String, String>, listener: VolleyResponseListener) {
+
+        (activity as BaseActivity).showProgressDialog()
+
         val stringRequest: StringRequest = object : StringRequest(Request.Method.POST, url,
             Response.Listener<String?> { response ->
+                (activity as BaseActivity).hideProgressDialog()
                 Log.e("request_POST", "response : $response")
                 listener.onResponse(response)
             },
             Response.ErrorListener { error ->
+                (activity as BaseActivity).hideProgressDialog()
                 Log.e("request_POST", "error : $error")
                 listener.onError(error.toString())
             })
@@ -50,6 +56,6 @@ object VolleyService {
         }
 
         // Access the RequestQueue through singleton class.
-        VolleySingleton.getInstance(context!!).addToRequestQueue(stringRequest)
+        VolleySingleton.getInstance(activity).addToRequestQueue(stringRequest)
     }
 }

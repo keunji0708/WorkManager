@@ -2,14 +2,28 @@ package org.techtown.workmanager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.techtown.workmanager.base.AppBaseActivity
 import org.techtown.workmanager.base.BaseActivity
 import org.techtown.workmanager.common.SharedPreferenceManager
+import org.techtown.workmanager.home.HomeFragment
 
-class MainActivity : AppBaseActivity() {
+class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+    private var TAG: String? = MainActivity::class.java.simpleName
+
+    var transaction: FragmentTransaction? = null
+    private val fragmentManager: FragmentManager = supportFragmentManager
+    private val homeFragment: HomeFragment = HomeFragment()
 
     // 마지막으로 뒤로 가기 버튼을 눌렀던 시간 저장
     private var backKeyPressedTime: Long = 0
@@ -19,16 +33,45 @@ class MainActivity : AppBaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_main)
 
+        transaction = fragmentManager.beginTransaction()
+        transaction!!.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
+
+        bottomNavigationView!!.setOnNavigationItemSelectedListener(this)
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+        when (item.getItemId()) {
+            R.id.navigation_home -> {
+                transaction.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
+                return true
+            }
+        }
+        return false
+    }
+
+    override fun onBackPressed() {
+        Log.e(TAG, "main fragment backStack: " + supportFragmentManager.backStackEntryCount)
+
+        if (isMenuOpen()) {
+            closeMenu()
+            return
+        }
+
+        val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.main_frame)
+        if (fragment is HomeFragment) {
+            closeApp()
+        } else {
+            val transaction: FragmentTransaction = fragmentManager.beginTransaction()
+            transaction!!.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
+            bottomNavigationView!!.setSelectedItemId(R.id.navigation_home)
+        }
 
     }
 
-
-
-    override fun onBackPressed() {
-        //super.onBackPressed();
-        // 기존 뒤로 가기 버튼의 기능을 막기 위해 주석 처리 또는 삭제
+    fun closeApp() {
 
         // 마지막으로 뒤로 가기 버튼을 눌렀던 시간에 2초를 더해 현재 시간과 비교 후
         // 2초가 지났으면 Toast 출력

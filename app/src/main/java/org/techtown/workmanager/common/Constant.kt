@@ -1,6 +1,7 @@
 package org.techtown.workmanager.common
 
 import org.techtown.workmanager.login.User
+import java.util.*
 
 object Constant {
     var login = false
@@ -8,6 +9,8 @@ object Constant {
 
     var yeolmae_num = 0
     var seed_num = 0
+
+    var server_date: Date? = null
 
     /**
      * url

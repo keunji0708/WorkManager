@@ -2,6 +2,7 @@ package org.techtown.workmanager.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -14,6 +15,7 @@ import org.techtown.workmanager.common.Constant
 import org.techtown.workmanager.common.SharedPreferenceManager
 import org.techtown.workmanager.login.LoginActivity
 import org.techtown.workmanager.login.User
+import kotlin.jvm.internal.Intrinsics
 
 
 open class AppBaseActivity : BaseActivity(){
@@ -39,16 +41,16 @@ open class AppBaseActivity : BaseActivity(){
         layoutInflater.inflate(layoutResID, activityContainer, true);
         super.setContentView(baseView)
 
-        //setUserInfo()
+        setUserInfo()
 
         mDrawerLayout = findViewById<DrawerLayout>(R.id.fullView)
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
         /**
-         * LOCK_MODE_LOCKED_CLOSED - 드로어의 swipe 기능을 비활성화하고, 드로어를 닫습니다. 유저는 swipe 모션을 사용할 수 없습니다.
-         * LOCK_MODE_LOCKED_OPEN - 드로어의 swipe 기능을 비활성화하고, 드로어를 오픈합니다. 유저는 swipe 모션을 사용할 수 없습니다.
-         * LOCK_MODE_UNDEFINED - 드로어의 설정된 상태들을 초기화 시킵니다.
-         * LOCK_MODE_UNLOCKED - LOCK_MODE_LOCKED_CLOSED, LOCK_MODE_LOCKED_OPEN로 비활성화된 swipe 기능을 활성화시킵니다.
+         * LOCK_MODE_LOCKED_CLOSED - 드로어의 swipe 기능을 비활성화, 드로어를 닫음. swipe 모션 사용 불가.
+         * LOCK_MODE_LOCKED_OPEN - 드로어의 swipe 기능을 비활성화, 드로어를 오픈합니다. swipe 모션 사용 불가.
+         * LOCK_MODE_UNDEFINED - 드로어의 설정된 상태들 초기화.
+         * LOCK_MODE_UNLOCKED - LOCK_MODE_LOCKED_CLOSED, LOCK_MODE_LOCKED_OPEN로 비활성화된 swipe 기능 활성화.
          *
          * 출처: https://android-blog.dev/49 [Log.d]
          */
@@ -65,15 +67,12 @@ open class AppBaseActivity : BaseActivity(){
             override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
                 //menuItem.setChecked(true)
                 val id: Int = menuItem.getItemId()
-                val title: String = menuItem.getTitle().toString()
+
                 if (id == R.id.side_열매선물) {
                     Toast.makeText(applicationContext, "열매선물", Toast.LENGTH_SHORT).show()
                 } else if (id == R.id.side_설정) {
                     Toast.makeText(applicationContext, "환경설정", Toast.LENGTH_SHORT).show()
                 }
-//                else if (id == R.id.logout) {
-//                    Toast.makeText(applicationContext, "$title: 로그아웃 시도중", Toast.LENGTH_SHORT).show()
-//                }
 
                 mDrawerLayout!!.closeDrawers()
                 return true
@@ -88,22 +87,28 @@ open class AppBaseActivity : BaseActivity(){
         btn_menu = findViewById(R.id.btn_menu)
 
         if (useToolbar()) {
-            tv_toolbar_title!!.text = getString(R.string.app_name) //user!!.name
+            tv_toolbar_title!!.text = getString(R.string.app_name)
             btn_logout!!.setOnClickListener {
                 logout()
             }
-
             btn_menu!!.setOnClickListener {
-                //Toast.makeText(applicationContext, "메뉴 클릭!", Toast.LENGTH_SHORT).show()
                 mDrawerLayout!!.openDrawer(GravityCompat.END)
-
             }
 
         } else {
             toolbar.visibility = View.GONE;
         }
 
+    }
 
+    //툴바를 사용할지 말지 정함
+    open fun useToolbar() : Boolean {
+        return true;
+    }
+
+    //툴바 타이틀 설정
+    open fun getTitleToolBar() : String {
+        return getString(R.string.app_name)
     }
 
     private fun setUserInfo() {
@@ -119,21 +124,17 @@ open class AppBaseActivity : BaseActivity(){
 
     }
 
-
-    fun logout(){
+    private fun logout(){
         finish()
-        SharedPreferenceManager.getInstance(getApplicationContext())!!.logout()
+        SharedPreferenceManager.getInstance(applicationContext)!!.logout()
     }
 
-    //툴바를 사용할지 말지 정함
-    open fun useToolbar() : Boolean {
-        return true;
+    fun isMenuOpen(): Boolean{
+        return mDrawerLayout!!.isDrawerOpen(GravityCompat.END);
     }
 
-    //툴바 타이틀 설정
-    open fun getTitleToolBar() : String {
-        return getString(R.string.app_name)
+    fun closeMenu() {
+        mDrawerLayout!!.closeDrawer(GravityCompat.END)
     }
-
 
 }

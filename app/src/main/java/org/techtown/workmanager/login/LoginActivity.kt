@@ -50,9 +50,9 @@ class LoginActivity : BaseActivity() {
 
         btn_login!!.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
-                //login()
-                startMainActivity()
-                finish()
+                login()
+//                startMainActivity()
+//                finish()
             }
         })
 
@@ -83,17 +83,19 @@ class LoginActivity : BaseActivity() {
                             val userObject = jsonObject.getString("user")
                             val gson = Gson()
                             val user: User = gson.fromJson(userObject, User::class.java)
-                            SharedPreferenceManager.getInstance(applicationContext)!!
-                                .saveUserInfo(user)
+                            SharedPreferenceManager.getInstance(applicationContext)!!.saveUserInfo(user)
+
+                            Constant.yeolmae_num = jsonObject.getInt("yeolmae")
+                            Constant.seed_num = jsonObject.getInt("seed")
 
                             Toast.makeText(applicationContext, "로그인 성공!", Toast.LENGTH_SHORT).show()
                             startMainActivity()
-                            finish()
                         } else {
                             Toast.makeText(applicationContext, "로그인 실패!", Toast.LENGTH_SHORT).show()
                             return
                         }
                     } catch (e: JSONException) {
+                        Toast.makeText(applicationContext, "로그인 실패!", Toast.LENGTH_SHORT).show()
                         e.printStackTrace()
                     }
 
@@ -109,6 +111,7 @@ class LoginActivity : BaseActivity() {
     private fun startMainActivity(){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
 }

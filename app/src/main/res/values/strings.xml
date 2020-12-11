@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">Forest</string>
-
-    <string name="logout_en">logout</string>
+    <string name="app_name">WorkManager</string>
 
     <string name="sabun">사번</string>
     <string name="password">비밀번호</string>
@@ -13,15 +11,17 @@
     <string name="position">직위</string>
 
     <string name="login">로그인</string>
+    <string name="login_en">login</string>
     <string name="logout">로그아웃</string>
+    <string name="logout_en">logout</string>
     <string name="signUp">회원가입</string>
 
     <!-- bottom navigation -->
-    <string name="bottom_search">임직원 검색</string>
     <string name="bottom_home">홈</string>
+    <string name="bottom_search">임직원 검색</string>
     <string name="bottom_yeolmae">열매/씨앗</string>
     <string name="bottom_report">업무보고</string>
-    <string name="bottom_temp">설정</string>
+    <string name="bottom_temp">Temp</string>
 
     <string name="gift">열매선물</string>
     <string name="settings">설정</string>
@@ -36,8 +36,8 @@
     <string name="test_message">선물입니다.</string>
     <string name="test_long_message">수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.수고하셨습니다.</string>
 
-    <string name="test_project">하나은행 스크래핑</string>
-    <string name="test_contents">하나은행 스크래핑 개편</string>
+    <string name="test_project">우유는 흰색</string>
+    <string name="test_contents">우유는 흰색. 바나나우유는 노란색</string>
 
     <string name="근무시간">근무시간</string>
     <string name="칭찬하기">칭찬하기</string>
