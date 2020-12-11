@@ -1,18 +1,13 @@
 package org.techtown.workmanager.login
 
-
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import org.json.JSONException
@@ -27,7 +22,7 @@ import org.techtown.workmanager.dataservice.VolleyService
 
 
 class LoginActivity : BaseActivity() {
-    val TAG = "MyRequestQueue"
+    private var TAG: String? = LoginActivity::class.java.simpleName
 
     private var btn_login: Button? = null
     private var btn_register: Button? = null
@@ -40,7 +35,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         btn_login = findViewById(R.id.btn_login)
         btn_register = findViewById(R.id.btn_register)
