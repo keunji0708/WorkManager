@@ -120,6 +120,7 @@ class MonthlyReportFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
+    // 달력에 보고서 날짜 표시
     private fun getMonthReportData() {
         val params: MutableMap<String, String> = HashMap()
 
@@ -154,45 +155,6 @@ class MonthlyReportFragment : Fragment() {
     }
 
 
-
-//    fun getMonthReportData() {
-//        val responseListener: Response.Listener<String?> =
-//            object : Response.Listener<String?> {
-//                override fun onResponse(response: String?) {
-//                    try {
-//                        Log.e(TAG, "getMonthlyDates : " + response)
-//                        val jsonArray = JSONArray(response)
-//                        monthlyDates = ArrayList()
-//
-//                        for (i in 0 until jsonArray.length()) {
-//                            val item = jsonArray.getJSONObject(i)
-//                            //Log.e(TAG, "getMonthlyDates item: " + item.getString("report_date"))
-//                            monthlyDates.add(item.getString("report_date"))
-//                        }
-//
-//                        val dateList: Array<String> = monthlyDates.toArray(arrayOfNulls<String>(monthlyDates.size))
-//                        ApiSimulator(dateList).executeOnExecutor(Executors.newSingleThreadExecutor())
-//
-//                    } catch (e: JSONException) {
-//                        e.printStackTrace()
-//                    }
-//                }
-//            }
-//        val errorListener: Response.ErrorListener =
-//            object : Response.ErrorListener {
-//                override fun onErrorResponse(error: VolleyError?) {
-//                    Log.e(TAG, "error : " + error)
-//                    Toast.makeText(requireContext(), "에러발생!", Toast.LENGTH_SHORT).show()
-//                    return
-//                }
-//            }
-//
-//        val report_month: String = selectedDay.substring(0, selectedDay.length - 3)
-//        val reportMonthRequest = ReportMonthRequest(Constant.userID, report_month, responseListener, errorListener)
-//        reportMonthRequest.setShouldCache(false)
-//        MySingleton.getInstance(requireContext()).addToRequestQueue(reportMonthRequest)
-//    }
-
     // 리사이클러뷰에 표시할 데이터 리스트 생성.
     private fun getDailyReportData() {
         val params: MutableMap<String, String> = HashMap()
@@ -218,7 +180,7 @@ class MonthlyReportFragment : Fragment() {
             })
     }
 
-    // 리사이클러뷰에 SimpleTextAdapter 객체 지정.
+    // 리사이클러뷰에 ReportAdapter 객체 지정.
     fun initAdapter(jsonArray: JSONArray?) {
         if (isAdded) {
             reportAdapter = ReportAdapter(jsonArray)
