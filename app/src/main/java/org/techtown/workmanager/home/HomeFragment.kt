@@ -28,10 +28,6 @@ class HomeFragment : Fragment() {
     private var mTimer: Timer? = null
     var time1 = ""
 
-    companion object {
-        private var MSG_SHOW_DATETIME = 1
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val timerTask = MainTimerTask()
         mTimer = Timer()
