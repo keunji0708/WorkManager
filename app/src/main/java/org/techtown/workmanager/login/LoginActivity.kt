@@ -67,7 +67,7 @@ class LoginActivity : BaseActivity() {
 
         val URL_POST = Constant.server_url + "/login/login.php"
 
-        VolleyService.request_POST(this, URL_POST, params,
+        VolleyService.request_POST_Progress(this, URL_POST, params,
             object : VolleyResponseListener {
                 override fun onResponse(response: String?) {
                     try {

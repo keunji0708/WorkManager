@@ -17,6 +17,7 @@ import org.techtown.workmanager.base.AppBaseActivity
 import org.techtown.workmanager.base.BaseActivity
 import org.techtown.workmanager.common.SharedPreferenceManager
 import org.techtown.workmanager.home.HomeFragment
+import org.techtown.workmanager.report.MonthlyReportFragment
 
 class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private var TAG: String? = MainActivity::class.java.simpleName
@@ -24,6 +25,8 @@ class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSel
     var transaction: FragmentTransaction? = null
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val homeFragment: HomeFragment = HomeFragment()
+    private val reportFragment: MonthlyReportFragment = MonthlyReportFragment()
+
 
     // 마지막으로 뒤로 가기 버튼을 눌렀던 시간 저장
     private var backKeyPressedTime: Long = 0
@@ -46,6 +49,10 @@ class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSel
         when (item.getItemId()) {
             R.id.navigation_home -> {
                 transaction.replace(R.id.main_frame, homeFragment).commitAllowingStateLoss()
+                return true
+            }
+            R.id.navigation_report -> {
+                transaction.replace(R.id.main_frame, reportFragment).commitAllowingStateLoss()
                 return true
             }
         }

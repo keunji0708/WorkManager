@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:orientation="vertical">
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        app:mcv_selectionColor="#91F3FF"
+        app:mcv_showOtherDates="defaults"
+        app:mcv_tileHeight="match_parent">
+
+    </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_selected_day"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@drawable/bd_gray_top_bottom"
+            android:gravity="center"
+            android:text="@string/test_date"
+            android:textColor="@color/c_black"
+            android:textSize="17dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:nestedScrollingEnabled="false"
+                android:padding="5dp"/>
+
+<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                android:layout_margin="15dp"-->
+<!--                app:fabSize="normal" />-->
+
+            <ImageButton
+                android:id="@+id/btn_add_report"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="15dp"
+                android:background="@drawable/btn_round_black"
+                android:backgroundTint="#97C85E"
+                android:src="@drawable/icon_plus" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

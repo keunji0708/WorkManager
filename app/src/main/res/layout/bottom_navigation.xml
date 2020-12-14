@@ -8,6 +8,7 @@
     app:itemIconSize="18dp"
     app:itemIconTint="@drawable/bottom_item_selected"
     app:itemTextColor="@drawable/bottom_item_selected"
+    app:labelVisibilityMode="unlabeled"
     app:menu="@menu/menu_bottom_nav">
 
 </com.google.android.material.bottomnavigation.BottomNavigationView>

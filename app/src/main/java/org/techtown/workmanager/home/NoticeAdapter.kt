@@ -12,8 +12,8 @@ import org.json.JSONObject
 import org.techtown.workmanager.R
 
 
-class NoticeRecyclerAdapter internal constructor(noticeArray: JSONArray) :
-    RecyclerView.Adapter<NoticeRecyclerAdapter.ViewHolder>() {
+class NoticeAdapter internal constructor(noticeArray: JSONArray?) :
+    RecyclerView.Adapter<NoticeAdapter.ViewHolder>() {
     private var mJsonArray: JSONArray? = null
 
     // 아이템 뷰를 저장하는 뷰홀더 클래스.

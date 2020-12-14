@@ -2,33 +2,27 @@ package org.techtown.workmanager.home
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.apache.commons.net.ntp.NTPUDPClient
-import org.apache.commons.net.ntp.TimeInfo
 import org.json.JSONArray
 import org.json.JSONException
-import org.json.JSONObject
-import org.techtown.workmanager.MainActivity
 import org.techtown.workmanager.R
-import org.techtown.workmanager.base.BaseFragment
 import org.techtown.workmanager.common.Constant
 import org.techtown.workmanager.dataservice.VolleyResponseListener
 import org.techtown.workmanager.dataservice.VolleyService
-import java.net.InetAddress
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class HomeFragment : BaseFragment() {
+class HomeFragment : Fragment() {
     private var TAG: String? = HomeFragment::class.java.simpleName
 
-    var adapter: NoticeRecyclerAdapter? = null
+    var adapter: NoticeAdapter? = null
     var noticeArray: JSONArray = JSONArray()
 
     private var mTimer: Timer? = null
@@ -38,14 +32,10 @@ class HomeFragment : BaseFragment() {
         private var MSG_SHOW_DATETIME = 1
     }
 
-    private fun setTimeTimer(){
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val timerTask = MainTimerTask()
         mTimer = Timer()
         mTimer!!.schedule(timerTask, 500, 1000)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        setTimeTimer()
 
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -75,7 +65,7 @@ class HomeFragment : BaseFragment() {
         }
 
         recycler_notice.layoutManager = LinearLayoutManager(requireContext())
-        adapter = NoticeRecyclerAdapter(noticeArray)
+        adapter = NoticeAdapter(noticeArray)
         recycler_notice!!.adapter = adapter
         getNoticeData()
     }
@@ -107,11 +97,11 @@ class HomeFragment : BaseFragment() {
         val params: MutableMap<String, String> = HashMap()
         val URL_POST = Constant.server_url + "/notice/getRecentNotice.php"
 
-        VolleyService.request_POST(activity, URL_POST, params,
+        VolleyService.request_POST_Progress(activity, URL_POST, params,
             object : VolleyResponseListener {
                 override fun onResponse(response: String?) {
                     try {
-                        adapter = NoticeRecyclerAdapter(JSONArray(response))
+                        adapter = NoticeAdapter(JSONArray(response))
                         recycler_notice!!.adapter = adapter
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -135,8 +125,8 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         val timerTask = MainTimerTask()
-        mTimer = Timer()
         mTimer!!.schedule(timerTask, 500, 3000)
+
         super.onResume()
     }
 

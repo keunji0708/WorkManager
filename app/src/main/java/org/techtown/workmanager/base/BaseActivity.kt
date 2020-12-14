@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import org.techtown.workmanager.BaseApplication
 import java.text.SimpleDateFormat
@@ -86,6 +87,10 @@ open class BaseActivity : AppCompatActivity() {
         } catch (e: Exception) {
             Log.d(TAG, "keyboardHide error : " + e.message)
         }
+    }
+
+    open fun showToast(msg: String?) {
+        Toast.makeText(applicationContext, msg, Toast.LENGTH_SHORT).show()
     }
 
 }

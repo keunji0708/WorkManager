@@ -43,4 +43,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     //server Time
     implementation 'commons-net:commons-net:3.6'
+    //calendarview
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 }
