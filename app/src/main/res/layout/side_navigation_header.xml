@@ -16,7 +16,7 @@
         android:contentDescription="nav_header_desc"
         android:paddingTop="10dp"
         android:visibility="gone"
-        app:srcCompat="@drawable/pic_employee" />
+        app:srcCompat="@drawable/picture_employee" />
 
     <TextView
         android:layout_width="match_parent"

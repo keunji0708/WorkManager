@@ -1,6 +1,7 @@
 package org.techtown.workmanager.report
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
@@ -15,10 +16,8 @@ import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
-import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.prolificinteractive.materialcalendarview.OnMonthChangedListener
+import com.prolificinteractive.materialcalendarview.*
+import kotlinx.android.synthetic.main.fragment_calendar_report.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.techtown.workmanager.R
@@ -41,23 +40,35 @@ class MonthlyReportFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     var reportAdapter: ReportAdapter? = null
 
-    lateinit var materialCalendarView: MaterialCalendarView
+    companion object{
+        lateinit var materialCalendarView: MaterialCalendarView
+        val formatter: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
+    }
+
     private val oneDayDecorator: OneDayDecorator = OneDayDecorator() // 오늘 날짜
     var monthlyDates: ArrayList<String> = ArrayList()
     private var selectedDay = ""
     private var doubleclick = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d(TAG, "onCreateView")
 
         return inflater.inflate(R.layout.fragment_calendar_report, container, false)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(TAG, "onViewCreated")
+
         val tv_selected_day: TextView = view.findViewById(R.id.tv_selected_day)
         val btn_add_report: ImageButton = view.findViewById(R.id.btn_add_report)
-
         materialCalendarView = view.findViewById(R.id.calendarView)
+
+
+        val date = Calendar.getInstance().time
+        selectedDay = formatter.format(date)
+
+        materialCalendarView.setSelectedDate(date)
+        tv_selected_day.text = selectedDay
 
         materialCalendarView.state().edit()
             .isCacheCalendarPositionEnabled(false)
@@ -74,37 +85,9 @@ class MonthlyReportFragment : Fragment() {
         )
 
         initRecycler(view)
+        getMonthReportData(1)
+        getDailyReportData(1)
 
-        val date = Calendar.getInstance().time
-        val formatter: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
-        selectedDay = formatter.format(date)
-        doubleclick = selectedDay
-
-        materialCalendarView.setSelectedDate(date)
-        tv_selected_day.text = selectedDay
-
-        materialCalendarView.setOnMonthChangedListener(object : OnMonthChangedListener {
-            override fun onMonthChanged(widget: MaterialCalendarView?, date: CalendarDay) {
-               // Log.e(TAG, "selectedDay : ${date.date}")
-                selectedDay = formatter.format(date.date)
-                materialCalendarView.setSelectedDate(date.date)
-                tv_selected_day.text = selectedDay
-                doubleclick = selectedDay
-
-                getMonthReportData()
-                getDailyReportData()
-            }
-        })
-
-        materialCalendarView.setOnDateChangedListener { widget, date, selected ->
-           // Log.e(TAG, "selectedDay : $selectedDay")
-            selectedDay = formatter.format(date.date)
-            tv_selected_day.text = selectedDay
-            getDailyReportData()
-        }
-
-        getMonthReportData()
-        getDailyReportData()
 
         btn_add_report.setOnClickListener {
 //            val intent = Intent(activity, DailyReportActivity::class.java)
@@ -114,6 +97,29 @@ class MonthlyReportFragment : Fragment() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart")
+        materialCalendarView.setOnMonthChangedListener { widget, date ->
+            Log.e(TAG, "setOnMonthChangedListener : ${date.date}")
+            selectedDay = formatter.format(date.date)
+            materialCalendarView.setSelectedDate(date.date)
+            tv_selected_day.text = selectedDay
+
+            getMonthReportData(2)
+            getDailyReportData(2)
+        }
+
+        materialCalendarView.setOnDateChangedListener { widget, date, selected ->
+            Log.e(TAG, "setOnDateChangedListener : $selectedDay")
+            selectedDay = formatter.format(date.date)
+            tv_selected_day.text = selectedDay
+            getDailyReportData(3)
+        }
+
+    }
+
+
     // 리사이클러뷰에 LinearLayoutManager 객체 지정.
     private fun initRecycler(root: View?) {
         recyclerView = root!!.findViewById(R.id.recycler_home)
@@ -121,7 +127,8 @@ class MonthlyReportFragment : Fragment() {
     }
 
     // 달력에 보고서 날짜 표시
-    private fun getMonthReportData() {
+    private fun getMonthReportData(type: Int) {
+        Log.d(TAG, "getMonthReportData() type : $type")
         val params: MutableMap<String, String> = HashMap()
 
         params["emp_id"] = Constant.user!!.emp_id.toString()
@@ -156,7 +163,8 @@ class MonthlyReportFragment : Fragment() {
 
 
     // 리사이클러뷰에 표시할 데이터 리스트 생성.
-    private fun getDailyReportData() {
+    private fun getDailyReportData(type: Int) {
+        Log.d(TAG, "getDailyReportData() type : $type")
         val params: MutableMap<String, String> = HashMap()
 
         params["emp_id"] = Constant.user!!.emp_id.toString()
@@ -164,7 +172,7 @@ class MonthlyReportFragment : Fragment() {
 
         val URL_POST = Constant.server_url + "/report/getDailyReport.php"
 
-        VolleyService.request_POST(activity, URL_POST, params,
+        VolleyService.request_POST_Progress(activity, URL_POST, params,
             object : VolleyResponseListener {
                 override fun onResponse(response: String?) {
                     try {
@@ -232,4 +240,22 @@ class MonthlyReportFragment : Fragment() {
         }
 
     }
+
+
+    override fun onDestroy() {
+        Log.d(TAG, "onDestroy")
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        Log.d(TAG, "onPause")
+        super.onPause()
+    }
+
+    override fun onResume() {
+        Log.d(TAG, "onResume")
+        super.onResume()
+    }
+
+
 }

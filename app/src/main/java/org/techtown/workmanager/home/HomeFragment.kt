@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     var noticeArray: JSONArray = JSONArray()
 
     private var mTimer: Timer? = null
+    //private var tv_home_time : TextView? = null
     var time1 = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,14 +47,16 @@ class HomeFragment : Fragment() {
         tv_home_yeolmae!!.text = Constant.yeolmae_num.toString()
         tv_home_seed!!.text = Constant.seed_num.toString()
 
-        //getEmpYeolmae()
+        tv_home_time.text = "00:00 오전"
+        tv_home_date.text = "2020년 00월 00일 "
+        // getEmpYeolmae()
 
         btn_home_출근.setOnClickListener {
-            tv_home_출근.text = "출근 - $time1"
+            tv_home_출근.text = "출근 - ${tv_home_time.text.substring(0, 8)}"
             btn_home_출근.isEnabled = false
         }
         btn_home_퇴근.setOnClickListener {
-            tv_home_퇴근.text = "퇴근 - $time1"
+            tv_home_퇴근.text = "퇴근 - ${tv_home_time.text.substring(0, 8)}"
             btn_home_퇴근.isEnabled = false
         }
 
@@ -78,14 +82,14 @@ class HomeFragment : Fragment() {
         val currentDate = Calendar.getInstance().time
         val date_text = SimpleDateFormat("yyyy년 MM월 dd일 (EE)", Locale.KOREA).format(currentDate)
 
-        val timeFormat = SimpleDateFormat("HH:mm:ss/aa", Locale.KOREA)
-        val currentTime: String = timeFormat.format(Date())
-        val array: Array<String> = currentTime.split("/".toRegex()).toTypedArray()
+        val timeFormat = SimpleDateFormat("HH:mm:ss aa", Locale.KOREA)
+        val currentTime = timeFormat.format(Date())
 
-        time1 = array[0]
-        val ampm = array[1]
-
-        tv_home_time.text = time1.substring(0, 5) + " " + ampm
+//        val array: Array<String> = currentTime.split("/".toRegex()).toTypedArray()
+//        time1 = array[0]
+//        val ampm = array[1]
+//        var temp = time1.substring(0, 5) + " " + ampm
+        tv_home_time.text = currentTime
         tv_home_date.text = date_text
     }
 

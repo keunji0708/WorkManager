@@ -88,7 +88,7 @@ object VolleyService {
         }
 
         // Access the RequestQueue through singleton class.
-        VolleySingleton.getInstance(activity).addToRequestQueue(stringRequest)
+        VolleySingleton.getInstance(activity!!).addToRequestQueue(stringRequest)
     }
 
 }
