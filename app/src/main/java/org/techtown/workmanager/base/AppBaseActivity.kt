@@ -50,7 +50,6 @@ open class AppBaseActivity : BaseActivity(){
          * LOCK_MODE_LOCKED_OPEN - 드로어의 swipe 기능을 비활성화, 드로어를 오픈합니다. swipe 모션 사용 불가.
          * LOCK_MODE_UNDEFINED - 드로어의 설정된 상태들 초기화.
          * LOCK_MODE_UNLOCKED - LOCK_MODE_LOCKED_CLOSED, LOCK_MODE_LOCKED_OPEN로 비활성화된 swipe 기능 활성화.
-         *
          * 출처: https://android-blog.dev/49 [Log.d]
          */
         mDrawerLayout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -61,6 +60,14 @@ open class AppBaseActivity : BaseActivity(){
 
     private fun intiSideMenuView(){
         sideNavigationView = findViewById<NavigationView>(R.id.side_nav)
+
+        val header: View = sideNavigationView!!.getHeaderView(0)
+
+        val side_emp_id = header.findViewById<TextView>(R.id.side_emp_id)
+        val side_emp_part = header.findViewById<TextView>(R.id.side_emp_part)
+
+        side_emp_id.text = user?.emp_name ?: ""
+        side_emp_part.text = user?.dep_name ?: ""
 
         sideNavigationView!!.setNavigationItemSelectedListener(object : NavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {

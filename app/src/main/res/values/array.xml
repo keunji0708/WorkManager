@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="depart_array">
+        <item>A_Part</item>
+        <item>B_Part</item>
+        <item>C_Part</item>
+        <item>D_Part</item>
+        <item>E_Part</item>
+    </string-array>
+</resources>

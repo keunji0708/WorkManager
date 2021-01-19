@@ -13,19 +13,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.techtown.ocean.search.SearchEmpFragment
 import org.techtown.workmanager.base.AppBaseActivity
 import org.techtown.workmanager.base.BaseActivity
 import org.techtown.workmanager.common.SharedPreferenceManager
 import org.techtown.workmanager.home.HomeFragment
 import org.techtown.workmanager.report.MonthlyReportFragment
 
-class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppBaseActivity(), SearchEmpFragment.OnCompleteListener, BottomNavigationView.OnNavigationItemSelectedListener {
     private var TAG: String? = MainActivity::class.java.simpleName
 
     var transaction: FragmentTransaction? = null
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val homeFragment: HomeFragment = HomeFragment()
     private val reportFragment: MonthlyReportFragment = MonthlyReportFragment()
+    private val searchEmpFragment: SearchEmpFragment = SearchEmpFragment()
 
 
     // 마지막으로 뒤로 가기 버튼을 눌렀던 시간 저장
@@ -53,6 +55,13 @@ class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSel
             }
             R.id.navigation_report -> {
                 transaction.replace(R.id.main_frame, reportFragment).commitAllowingStateLoss()
+                return true
+            }
+            R.id.navigation_search -> {
+                val bundle = Bundle()
+                bundle.putString("activityType", "main")
+                searchEmpFragment.setArguments(bundle)
+                transaction.replace(R.id.main_frame, searchEmpFragment).commitAllowingStateLoss()
                 return true
             }
         }
@@ -96,5 +105,9 @@ class MainActivity : AppBaseActivity(), BottomNavigationView.OnNavigationItemSel
             toast = Toast.makeText(this, "종료", Toast.LENGTH_LONG)
             toast.show()
         }
+    }
+
+    override fun onSearchEmpComplete(name: String?, id: String?) {
+        Log.e("TAG", "Main onSearchEmpComplete")
     }
 }

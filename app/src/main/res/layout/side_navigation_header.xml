@@ -19,6 +19,7 @@
         app:srcCompat="@drawable/picture_employee" />
 
     <TextView
+        android:id="@+id/side_emp_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="유재석 부장"
@@ -27,7 +28,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/side_emp_part"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
